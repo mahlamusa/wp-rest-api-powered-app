@@ -19,6 +19,8 @@ Important:
 
 1. Working local WordPress installation with some posts, preferably with featured images/attachments. Install this plugin: https://github.com/WP-API/Basic-Auth and this one https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/
 
+- Finished sample plugin to extend REST API: https://gist.github.com/mahlamusa/9bd45e5084aabb993d58e3bdfd6755fb
+
 2. In your local WordPress installation, you should have a PHP file located in ‘wp-content/mu-plugins/rest-api.php’, will will add some code during the workshop to this file.
 3. Clone this repository to an workable folder on your computer: https://github.com/mahlamusa/wp-rest-api-powered-app
 
