@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Edit {{post.type}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+        <ion-label>Post Type</ion-label>
+        <ion-select [(ngModel)]="post.type">
+          <ion-option value="post">Post</ion-option>
+          <ion-option value="suggestion">Suggestion</ion-option>
+          <ion-option value="page">Page</ion-option>
+        </ion-select>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label floating>Post Title</ion-label>
+        <ion-input [(ngModel)]="post.title.rendered"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label floating>Excerpt</ion-label>
+        <ion-textarea [(ngModel)]="post.excerpt.rendered"></ion-textarea>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label floating>Content</ion-label>
+        <ion-textarea [(ngModel)]="post.content.rendered"></ion-textarea>
+      </ion-item>
+  
+      <button ion-button (click)="submitPost()" full>Update Post</button>
+    </ion-list>
+</ion-content>
+

@@ -1,0 +1,13 @@
+{
+  "name": "powerpressi",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/wp-json",
+      "proxyUrl": "http://localhost:86/"
+    }
+  ]
+}

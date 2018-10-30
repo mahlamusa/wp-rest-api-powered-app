@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  
+<ion-list>
+
+  <ion-card *ngFor="let post of posts">
+    <img [src]="post.attachment_url" (click)="viewSinglePost(post)" />
+    <ion-card-header (click)="viewSinglePost(post)">
+        {{ post.title.rendered }}
+    </ion-card-header>
+    <ion-card-content (click)="viewSinglePost(post)">
+      <p [innerHTML]='post.excerpt.rendered'></p>
+    </ion-card-content>
+    <ion-row>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>12</div>
+          </button>
+        </ion-col>
+        <ion-col>
+            <button ion-button icon-start clear small>
+              <ion-icon name="thumbs-down"></ion-icon>
+              <div>3</div>
+            </button>
+          </ion-col>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>4</div>
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-note>
+            11h ago
+          </ion-note>
+        </ion-col>
+      </ion-row>
+  </ion-card>
+</ion-list>
+    
+</ion-content>

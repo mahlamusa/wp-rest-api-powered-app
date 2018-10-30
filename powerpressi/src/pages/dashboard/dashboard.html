@@ -1,0 +1,72 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button icon-only menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Dashboard</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-list *ngIf="siteinfo">
+      <ion-item no-padding>
+       <ion-row>
+        <ion-col col-6>
+          <ion-card no-padding>
+            <ion-card-header>
+              Posts
+            </ion-card-header>
+            <ion-card-content>
+              <p>Published: {{ siteinfo.posts.publish }}</p>
+              <p>Drafts: {{ siteinfo.posts.draft }}</p>
+              <p>Trashed: {{ siteinfo.posts.trash }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col col-6>
+            <ion-card no-padding>
+                <ion-card-header>
+                  Pages
+                </ion-card-header>
+                <ion-card-content>
+                  <p>Published: {{ siteinfo.pages.publish }}</p>
+                  <p>Drafts: {{ siteinfo.pages.draft }}</p>
+                  <p>Trashed: {{ siteinfo.pages.trash }}</p>
+                </ion-card-content>
+              </ion-card>
+        </ion-col>
+       </ion-row>
+      </ion-item>
+
+      <!-- Latest Posts-->
+      <ion-item-divider>Latest Posts</ion-item-divider>
+      <ion-item *ngFor="let post of posts">
+        {{post.title.rendered}}
+      </ion-item>
+
+      <!-- Latest Pages-->
+      <ion-item-divider>Latest Pages</ion-item-divider>
+      <ion-item *ngFor="let page of pages">
+        {{page.title.rendered}}
+      </ion-item>
+    </ion-list>
+
+
+    <!-- Floating action button -->
+    <ion-fab center bottom>
+        <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+        <ion-fab-list side="top">
+          <button ion-fab color="primary" (click)="newPost('page')"><ion-icon name="document"></ion-icon></button>
+        </ion-fab-list>
+        <ion-fab-list side="left">
+          <button ion-fab color="light" (click)="newPost('suggestion')"><ion-icon name="bulb"></ion-icon></button>
+        </ion-fab-list>
+        <ion-fab-list side="right">
+          <button ion-fab color="dark" (click)="newPost('post')"><ion-icon name="paper"></ion-icon></button>
+        </ion-fab-list>
+    </ion-fab>
+</ion-content>

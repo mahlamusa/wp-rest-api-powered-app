@@ -1,0 +1,60 @@
+<ion-menu [content]="content">
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item (click)="openPage('home')">
+        <ion-icon name="paper" item-left large></ion-icon>
+        <h2>Reader</h2>
+        <p></p>
+      </button>
+      <button menuClose ion-item (click)="openPage('dashboard')" *ngIf='isLoggedIn'>
+        <ion-icon name="home" item-left large></ion-icon>
+        <h2>Dashboard</h2>
+        <p></p>
+      </button>
+      <button menuClose ion-item  (click)="openPage('dashboard')" *ngIf='isLoggedIn'>
+          <ion-icon name="contact" item-left large></ion-icon>
+          <h2>My Account</h2>
+          <p>View my profile</p>
+        </button>
+      <button menuClose ion-item (click)="openPage('media')" *ngIf='isLoggedIn'>
+        <ion-icon name="image" item-left large></ion-icon>
+        <h2>Media</h2>
+        <p>Manage media library</p>
+      </button>
+      <button menuClose ion-item (click)="openPage('posts')" *ngIf='isLoggedIn'>
+        <ion-icon name="paper" item-left large></ion-icon>
+        <h2>Posts</h2>
+        <p>Edit posts</p>
+      </button>
+      <button menuClose ion-item  (click)="openPage('pages')" *ngIf='isLoggedIn'>
+        <ion-icon name="document" item-left large></ion-icon>
+        <h2>Pages</h2>
+        <p>Edit pages</p>
+      </button>
+      <button menuClose ion-item  (click)="openPage('suggestions')" *ngIf='isLoggedIn'>
+        <ion-icon name="bulb" item-left large></ion-icon>
+        <h2>Suggestions</h2>
+        <p>Manage suggestions</p>
+      </button>
+      <button menuClose ion-item  (click)="openPage('new')" *ngIf='isLoggedIn'>
+        <ion-icon name="add" item-left large></ion-icon>
+        <h2>Add New</h2>
+        <p>Add New Post/Suggestion</p>
+      </button>
+      <button menuClose ion-item  (click)="openPage('login')" *ngIf='!isLoggedIn'>
+        <ion-icon name="unlock" item-left large></ion-icon>
+        <h2>Login</h2>
+        <p>Login to access account</p>
+      </button>
+      <button menuClose ion-item  (click)="logout()" *ngIf='isLoggedIn'>
+        <ion-icon name="lock" item-left large></ion-icon>
+        <h2>Logout</h2>
+        <p>See you again</p>
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="homePage" #content swipeBackEnabled="false"></ion-nav>

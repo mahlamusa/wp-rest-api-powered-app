@@ -1,0 +1,45 @@
+version: '2'
+services:
+  wprest:
+    depends_on:
+      - wprestdb
+    image: wordpress:latest
+    restart: always
+    volumes:
+      - ./wp-content:/var/www/html/wp-content 
+    environment:
+      WORDPRESS_DB_HOST: wprestdb:3306
+      WORDPRESS_DB_PASSWORD: p4ssw0rd!
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_DISPLAY', false);
+        define( 'WP_DEBUG_LOG', true);
+        @ini_set('display_errors',0);
+    ports:
+      - 86:80 # Expose http and https
+    networks:
+      - back
+  wprestdb:
+    image: mysql:5.7
+    restart: always
+    volumes:
+       - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: p4ssw0rd!
+    networks:
+      - back
+  phpmyadmin:
+    depends_on:
+      - wprestdb
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 87:80
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: p4ssw0rd!
+    networks:
+      - back
+networks:
+  back:
+volumes:
+  db_data:
