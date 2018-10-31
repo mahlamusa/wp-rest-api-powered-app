@@ -35,7 +35,17 @@
         <ion-label floating>Content</ion-label>
         <ion-textarea [(ngModel)]="content"></ion-textarea>
       </ion-item>
+
+      <ion-item>
+        <ion-label>Post Status</ion-label>
+        <ion-select [(ngModel)]="status">
+          <ion-option value="publish">Published</ion-option>
+          <ion-option value="draft">Draft</ion-option>
+        </ion-select>
+      </ion-item>
   
-      <button ion-button (click)="submitPost()" full>Add {{type}}</button>
+      
     </ion-list>
+
+    <button ion-button (click)="submitPost()" full>Add {{type}}</button>
 </ion-content>

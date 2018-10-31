@@ -13,9 +13,9 @@ export class UserProvider {
   password: any;
   isLoggedIn: boolean;
 
-  //@ViewChild('content') childNavCtrl: NavController;
+  @ViewChild('content') childNavCtrl: NavController;
 
-  constructor( private storage: Storage, public navCtrl: NavController, public http: Http, public events: Events) {
+  constructor( private storage: Storage, public http: Http, public events: Events) {
     
   }
 
@@ -57,7 +57,7 @@ export class UserProvider {
 
         this.events.publish('user:loggedin', user );
 
-        this.navCtrl.setRoot(DashboardPage);
+        this.childNavCtrl.setRoot(DashboardPage);
     }, (error) => {
       console.log(error);
     });

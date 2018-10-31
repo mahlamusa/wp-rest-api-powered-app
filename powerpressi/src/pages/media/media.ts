@@ -1,6 +1,6 @@
 import { PostsProvider } from './../../providers/posts/posts';
-import { Component } from '@angular/core';
-import { IonicPage, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavParams, NavController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -10,6 +10,8 @@ import { IonicPage, NavParams } from 'ionic-angular';
 export class MediaPage {
 
   media: any = [];
+
+  @ViewChild('content') childNavCtrl: NavController;
 
   constructor( public navParams: NavParams, public postsProvider: PostsProvider) {
     

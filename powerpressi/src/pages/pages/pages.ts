@@ -1,7 +1,7 @@
 import { PopoverPage } from './../popover/popover';
 import { Http } from '@angular/http';
-import { Component } from '@angular/core';
-import { IonicPage, NavParams, PopoverController, Events } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavParams, PopoverController, Events, NavController } from 'ionic-angular';
 
 import { PostsProvider } from './../../providers/posts/posts';
 
@@ -14,6 +14,8 @@ export class PagesPage {
 
   pages: any = [];
 
+  @ViewChild('content') childNavCtrl: NavController;
+
   constructor( public navParams: NavParams, public http: Http, public popoverCtrl: PopoverController, public postsProvider: PostsProvider, public events: Events) {
     
   }
@@ -23,7 +25,11 @@ export class PagesPage {
   }
 
   loadPages() {
-    this.pages = this.postsProvider.load( 'pages' );
+    this.pages = this.postsProvider.load('pages')
+    .map( response => response.json() )
+    .subscribe( posts => {
+      this.pages = posts;
+    });
   }
 
   viewPage(post) {

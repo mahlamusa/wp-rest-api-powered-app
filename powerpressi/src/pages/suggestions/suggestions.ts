@@ -1,6 +1,6 @@
 import { PostsProvider } from './../../providers/posts/posts';
-import { Component } from '@angular/core';
-import { IonicPage, NavParams, PopoverController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavParams, PopoverController, NavController } from 'ionic-angular';
 import { PopoverPage } from '../popover/popover';
 
 @IonicPage()
@@ -11,6 +11,8 @@ import { PopoverPage } from '../popover/popover';
 export class SuggestionsPage {
 
   suggestions: any;
+
+  @ViewChild('content') childNavCtrl: NavController;
   
   constructor( public navParams: NavParams, public postsProvider: PostsProvider, public popoverCtrl: PopoverController) {
     this.loadSuggestions();

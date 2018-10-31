@@ -1,6 +1,7 @@
 import { Injectable, ViewChild } from '@angular/core';
 import { NavController, PopoverController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { Storage } from '@ionic/storage';
 
 import * as Enums from '../../enums/enums';
 
@@ -13,7 +14,7 @@ export class PostsProvider {
 
   @ViewChild('content') childNavCtrl: NavController;
 
-  constructor( public http: Http, public popoverCtrl: PopoverController ) {
+  constructor( public http: Http, public popoverCtrl: PopoverController, public storage: Storage ) {
     
   }
 
@@ -26,22 +27,22 @@ export class PostsProvider {
    */
   load( objectsType, args = null ) {
 
-    let url = Enums.API.apiUrl + objectsType; // http://example.com/wp-json/wp/v2/<objectsType>
+    // http://example.com/wp-json/wp/v2/<objectsType>
+    let url = Enums.API.apiUrl + objectsType; 
     if ( args != null ) {
-      url = url + '?' + JSON.stringify( args ); // http://example.com/wp-json/wp/v2/<objectsType>?key=value&key2=value2
+      url = url + '?' + JSON.stringify( args );
+      // http://example.com/wp-json/wp/v2/<objectsType>?key=value&key2=value2
     }
 
-    this.http.get( url )
-    .map( response => response.json())
-    .subscribe(posts => {
-      this.posts = posts;
-      return posts;
+    return this.http.get( url );
+    //.map( response => response.json())
+    //.subscribe(posts => {
+    //  return posts;
 
-    }, (error) => {
-      console.log(error);
-    });
-
-    return this.posts;
+    //}, (error) => {
+    //  return null;
+    //  console.log(error);
+    //});
   }
 
   /**
@@ -51,21 +52,22 @@ export class PostsProvider {
    */
   add( post, objectsType = 'posts') {
 
+    let token = this.getToken();
+
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
+      //'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
+      'Authorization': 'Bearer ${token}'
     });
 
     let options = new RequestOptions({ headers: headers });
 
-    this.http.post( Enums.API.apiUrl + objectsType, JSON.stringify(post), options) // https://domain.com/wp-json/wp-v2/posts
-    .map( response => response.json() )
-    .subscribe( post => {
-      return post;
-    }, (error) => {
-      console.log(error);
-    });
+    return this.http.post( Enums.API.apiUrl + objectsType, JSON.stringify(post), options); // https://domain.com/wp-json/wp-v2/posts
+    //.map( response => response.json() )
+    //.subscribe( post => {
+    //  return post;
+    //} );
   }
 
   /**
@@ -75,11 +77,13 @@ export class PostsProvider {
    * @param objectsType The plural post type to be updated
    */
   update( post, objectsType = 'posts') {
+    let token = this.getToken();
 
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
+      //'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
+      'Authorization': 'Bearer ${token}'
     });
 
     let options = new RequestOptions({ headers: headers });
@@ -100,11 +104,13 @@ export class PostsProvider {
    * @param postType the type of the post to be deleted
    */
   delete( post, postType ) {
+    let token = this.getToken();
 
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
+      //'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
+      'Authorization': 'Bearer ${token}'
     });
 
     let options = new RequestOptions({ headers: headers });
@@ -130,6 +136,14 @@ export class PostsProvider {
 
   viewPost( post ) {
     //this.childNavCtrl.setRoot(SinglePostPage, {post: post} );
+  }
+
+  getToken() {
+    this.storage.ready().then( () => {
+      this.storage.get( 'currentUser' ).then( (user) => {
+        return user.token
+      } );
+    });
   }
 
 }

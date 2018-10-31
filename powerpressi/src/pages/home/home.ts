@@ -1,3 +1,4 @@
+import { PostsProvider } from './../../providers/posts/posts';
 import { Component } from '@angular/core';
 import { NavController,   NavParams, IonicPage } from 'ionic-angular';
 import { Http } from '@angular/http';
@@ -16,7 +17,7 @@ export class HomePage {
   pages: any;
   suggestions: any;
   
-  constructor( public navParams: NavParams, public navCtrl: NavController, public http: Http) {    
+  constructor( public navParams: NavParams, public navCtrl: NavController, public http: Http, public postsProvider: PostsProvider) {    
   }
 
   ionViewDidLoad() {
@@ -24,7 +25,11 @@ export class HomePage {
   }
 
   loadPosts() {
-    
+    this.posts = this.postsProvider.load('posts')
+    .map( response => response.json() )
+    .subscribe( posts => {
+      this.posts = posts;
+    });
   }
 
   viewSinglePost(post) {

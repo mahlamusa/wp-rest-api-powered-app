@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavParams, NavController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { PostsProvider } from '../../providers/posts/posts';
@@ -15,6 +15,8 @@ export class DashboardPage {
   pages: any;
   suggestions: any;
   siteinfo: any;
+
+  @ViewChild('content') childNavCtrl: NavController;
 
   constructor( public navParams: NavParams, public http: Http, public postsProvider: PostsProvider) {
     

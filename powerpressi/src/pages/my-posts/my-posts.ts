@@ -3,7 +3,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavParams, PopoverController, NavController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { PopoverPage } from '../popover/popover';
-import * as Enums from '../../enums/enums';
 
 @IonicPage()
 @Component({
