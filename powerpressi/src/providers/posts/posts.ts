@@ -57,8 +57,8 @@ export class PostsProvider {
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      //'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
-      'Authorization': 'Bearer ${token}'
+      'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
+      //'Authorization': 'Bearer ${token}'
     });
 
     let options = new RequestOptions({ headers: headers });
@@ -82,8 +82,8 @@ export class PostsProvider {
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      //'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
-      'Authorization': 'Bearer ${token}'
+      'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
+      //'Authorization': 'Bearer ${token}'
     });
 
     let options = new RequestOptions({ headers: headers });
@@ -104,13 +104,13 @@ export class PostsProvider {
    * @param postType the type of the post to be deleted
    */
   delete( post, postType ) {
-    let token = this.getToken();
+    //let token = this.getToken();
 
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      //'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
-      'Authorization': 'Bearer ${token}'
+      'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
+      //'Authorization': 'Bearer ${token}'
     });
 
     let options = new RequestOptions({ headers: headers });

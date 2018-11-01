@@ -25,11 +25,7 @@ export class PagesPage {
   }
 
   loadPages() {
-    this.pages = this.postsProvider.load('pages')
-    .map( response => response.json() )
-    .subscribe( posts => {
-      this.pages = posts;
-    });
+    
   }
 
   viewPage(post) {

@@ -18,6 +18,6 @@ export class MediaPage {
   }
 
   ionViewDidLoad() {
-    this.media = this.postsProvider.load( "media" );
+    
   }
 }
