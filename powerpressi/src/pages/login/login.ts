@@ -1,6 +1,9 @@
+import { DashboardPage } from './../dashboard/dashboard';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavParams, Events, NavController } from 'ionic-angular';
+import { Http, Headers } from '@angular/http';
 import { UserProvider } from './../../providers/user/user';
+import * as Enums from '../../enums/enums';
 
 @IonicPage()
 @Component({
@@ -15,7 +18,7 @@ export class LoginPage {
 
   @ViewChild('content') childNavCtrl: NavController;
   
-  constructor(public navParams: NavParams,  public events: Events, public userProvider: UserProvider) {
+  constructor(public navParams: NavParams,  public events: Events, public userProvider: UserProvider, public http: Http) {
     if ( this.getUser() != null ) {
       this.events.publish('user:loggedin', this.getUser() );
     }
@@ -29,8 +32,36 @@ export class LoginPage {
     return this.userProvider.getUser();
   }
   
+  /**
+   * This is NOT a real login.
+   * PLEASE DO NOT INCLUDE THIS IN A REAL APP.
+   * If you use this in production, your neighbor's dog will swallow your house with you inside.
+   */
   login() {
-    this.userProvider.doLogin(this.username, this.password);
+    let headers = new Headers();
+    headers.append( 'Content-Type', 'application/json');
+
+    let userdata = {
+      'search': this.username,
+    }
+
+    this.http.get( Enums.API.apiUrl + 'users', JSON.stringify( userdata ) )
+    .map( response => response.json() )
+    .subscribe( users => {
+      let user = users[0];
+      if( user.name == this.username || user.username == this.username || user.nickname == this.username ) {
+        this.saveUser(user);
+        this.isLoggedIn == true;
+
+        this.events.publish('user:loggedin', user );
+
+        this.childNavCtrl.setRoot(DashboardPage);
+      }
+
+      console.log(users[0]);
+    }, (error) => {
+      console.log(error);
+    });
   }
 
 }

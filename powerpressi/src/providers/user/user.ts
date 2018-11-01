@@ -40,6 +40,38 @@ export class UserProvider {
     return true;
   }
 
+  /**
+   * This is NOT a real login.
+   * PLEASE DO NOT INCLUDE THIS IN A REAL APP.
+   * If you use this in production, your neighbor's dog will swallow your house with you inside.
+   */
+  login(username, password) {
+    let headers = new Headers();
+    headers.append( 'Content-Type', 'application/json');
+
+    let userdata = {
+      'search': this.username,
+    }
+
+    this.http.get( Enums.API.apiUrl + 'users', JSON.stringify( userdata ) )
+    .map( response => response.json() )
+    .subscribe( users => {
+      let user = users[0];
+      if( user.name == this.username || user.username == this.username || user.nickname == this.username ) {
+        this.saveUser(user);
+        this.isLoggedIn == true;
+
+        this.events.publish('user:loggedin', user );
+
+        this.childNavCtrl.setRoot(DashboardPage);
+      }
+
+      console.log(users[0]);
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
   doLogin(username, password) {
     let headers = new Headers();
     headers.append( 'Content-Type', 'application/json');

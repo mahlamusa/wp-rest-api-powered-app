@@ -25,14 +25,13 @@ export class NewPostPage {
   }
   
   submitPost() {
-    let token = this.getToken();
-    console.log("Token: ", token);
+    //let token = this.getToken();
 
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       //'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
-      'Authorization': 'Bearer ${token}'
+      //'Authorization': 'Bearer ${token}'
     });
 
     let post = {
