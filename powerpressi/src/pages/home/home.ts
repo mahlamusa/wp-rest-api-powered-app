@@ -25,11 +25,7 @@ export class HomePage {
   }
 
   loadPosts() {
-    this.http.get( 'http://localhost:86/wp-json/wp/v2/posts')
-    .map( response => response.json() )
-    .subscribe( posts => {
-      this.posts = posts;
-    });
+    
   }
 
   viewSinglePost(post) {
