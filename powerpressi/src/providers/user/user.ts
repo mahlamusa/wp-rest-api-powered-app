@@ -87,9 +87,9 @@ export class UserProvider {
       console.log(user);
       this.isLoggedIn == true;
 
-        this.events.publish('user:loggedin', user );
+      this.events.publish('user:loggedin', user );
 
-        this.childNavCtrl.setRoot(DashboardPage);
+      this.childNavCtrl.setRoot(DashboardPage);
     }, (error) => {
       console.log(error);
     });

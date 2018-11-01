@@ -17,9 +17,9 @@ export class NewPostPage {
   content: any;
   status: any;
 
-  @ViewChild('content') childNavCtrl: NavController;
+  //@ViewChild('content') childNavCtrl: NavController;
 
-  constructor( public navParams: NavParams, public http: Http, public storage: Storage) {
+  constructor( public navCtrl: NavController, public navParams: NavParams, public http: Http, public storage: Storage) {
     this.type = this.navParams.get( 'post_type' );
     console.log( this.getToken() );
   }
@@ -30,7 +30,7 @@ export class NewPostPage {
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      //'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
+      'Authorization': 'Basic ' + btoa( Enums.API.apiUsername + ':' + Enums.API.apiPassword )
       //'Authorization': 'Bearer ${token}'
     });
 

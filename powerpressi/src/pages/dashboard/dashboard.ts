@@ -3,6 +3,7 @@ import { IonicPage, NavParams, NavController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { PostsProvider } from '../../providers/posts/posts';
+import { NewPostPage } from '../new-post/new-post';
 
 @IonicPage()
 @Component({
@@ -16,9 +17,9 @@ export class DashboardPage {
   suggestions: any;
   siteinfo: any;
 
-  @ViewChild('content') childNavCtrl: NavController;
+  //@ViewChild('content') childNavCtrl: NavController;
 
-  constructor( public navParams: NavParams, public http: Http, public postsProvider: PostsProvider) {
+  constructor( public navCtrl: NavController, public navParams: NavParams, public http: Http, public postsProvider: PostsProvider) {
     
   }
 
@@ -46,15 +47,14 @@ export class DashboardPage {
   }
 
   newPost() {
-    this.postsProvider.newPost( 'post' );
+    this.navCtrl.setRoot( NewPostPage, {post_type: 'post' } );
   }
 
   newSuggestion() {
-    this.postsProvider.newPost( 'suggestion' );
+    this.navCtrl.setRoot( NewPostPage, {post_type: 'suggestion' } );
   }
-
   newPage() {
-    this.postsProvider.newPost( 'page' );
+    this.navCtrl.setRoot( NewPostPage, {post_type: 'page' } );
   }
 
 }

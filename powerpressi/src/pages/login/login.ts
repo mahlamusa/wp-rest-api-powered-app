@@ -1,9 +1,9 @@
-import { DashboardPage } from './../dashboard/dashboard';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavParams, Events, NavController } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import { UserProvider } from './../../providers/user/user';
 import * as Enums from '../../enums/enums';
+import { DashboardPage } from './../dashboard/dashboard';
 
 @IonicPage()
 @Component({
