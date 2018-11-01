@@ -1,3 +1,4 @@
+import { SinglePostPage } from './../single-post/single-post';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavParams, NavController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -48,6 +49,8 @@ export class NewPostPage {
     .map( response => response.json() )
     .subscribe( post => {
       console.log(post);
+
+      this.navCtrl.push(SinglePostPage, {post:post});
     })
   }
 
